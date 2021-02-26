@@ -1,40 +1,59 @@
-import React  from 'react';
+import React, {useMemo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Form, Input, Button} from 'antd';
-import {createNewTask, setTaskFormOpen, setUserMessage} from '../../store/actions';
+import {createNewTask, editCurrentTask} from '../../store/actions';
 import styles from '../../commonStyles/form.module.scss';
 
-const TaskForm = () => {
-    const {userMessage, isAdmin} = useSelector(state => state.state);
+const TaskForm = ({handleCancel}) => {
+    const {userMessage, isAdmin, currentTask} = useSelector(state => state.state);
     const dispatch = useDispatch();
     const [form] = Form.useForm();
+    const isFieldsDisabled = useMemo(() => isAdmin && currentTask, [isAdmin, currentTask]);
+
+    const getNewStatus = (textWasEdited) => {
+        const {status: currentStatus} = currentTask;
+        let newStatus = currentStatus;
+        if (textWasEdited) newStatus = currentStatus === 0 ? 1 : currentStatus === 10 ? 11 : currentStatus;
+        return newStatus;
+    };
+
+    const getEditedData = values => {
+        const prevText = currentTask.text;
+        const textWasEdited = prevText !== values.text;
+        const newStatus = getNewStatus(textWasEdited);
+        return {...values, id: currentTask.id, status: newStatus};
+    };
 
     const onFinish = values => {
-        dispatch(createNewTask(values));
+        if (currentTask) {
+            const data = getEditedData(values);
+            dispatch(editCurrentTask(data));
+        } else {
+            dispatch(createNewTask(values));
+        }
     };
 
     const closeModal = () => {
         form.resetFields();
-        dispatch(setUserMessage(null));
-        dispatch(setTaskFormOpen(false));
+        handleCancel();
     };
 
     return <Form
         form={form}
-        name="login"
+        name="task"
         onFinish={onFinish}
         initialValues={{
-            username: '',
-            email: '',
-            text: '',
+            username: currentTask?.username || '',
+            email: currentTask?.email || '',
+            text: currentTask?.text || '',
         }}
     >
         <Form.Item name="username">
-            <Input placeholder="Name" disabled={isAdmin}/>
+            <Input placeholder="Name" disabled={isFieldsDisabled}/>
         </Form.Item>
         {userMessage ? <div className={styles.errorMessage}>{userMessage.username || userMessage.username}</div> : null}
         <Form.Item name="email">
-            <Input type='email' placeholder={'Email'} disabled={isAdmin}/>
+            <Input type='email' placeholder={'Email'} disabled={isFieldsDisabled}/>
         </Form.Item>
         {userMessage ? <div className={styles.errorMessage}>{userMessage.email || userMessage.username}</div> : null}
         <Form.Item name="text">

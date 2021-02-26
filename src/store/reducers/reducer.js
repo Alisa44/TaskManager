@@ -10,6 +10,7 @@ const initialState = {
     sortDirection: null,
     sortField: null,
     userMessage: null,
+    currentTask: null,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -42,6 +43,9 @@ export const reducer = (state = initialState, action) => {
             
         case ACTIONS.SET_USER_MESSAGE:
             return {...state, userMessage: payload};
+
+        case ACTIONS.SET_CURRENT_TASK:
+            return {...state, currentTask: payload};
 
         default:
             return state;

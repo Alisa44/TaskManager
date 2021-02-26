@@ -20,13 +20,12 @@ export const createTask = data => {
     });
 };
 
-export const editTask = (data, token) => {
+export const editTask = (taskId, data) => {
     return axios({
-        url: `${BASE_URL}/edit/:id?developer=Larysa`,
+        url: `${BASE_URL}/edit/${taskId}?developer=Larysa`,
         method: 'POST',
         headers: { 'content-type': 'multipart/form-data'},
         data,
-        params: {token}
     });
 };
 

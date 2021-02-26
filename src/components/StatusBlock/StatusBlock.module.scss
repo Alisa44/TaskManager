@@ -1,0 +1,13 @@
+.wrapper {
+  width: 100px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.editedMark {
+  color: lightgrey;
+  font-size: 12px;
+  text-decoration: underline;
+  margin-right: 20px;
+}

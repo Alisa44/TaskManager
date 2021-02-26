@@ -14,8 +14,6 @@ const Header = () => {
         dispatch(setIsAdmin(false));
     };
 
-    console.log(isAdmin);
-
     const onLoginClick = () => {
         isAdmin
             ? logOut()
@@ -43,4 +41,4 @@ const Header = () => {
     </div>;
 };
 
-export default Header;
+export default React.memo(Header);
