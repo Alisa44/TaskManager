@@ -1,0 +1,56 @@
+{
+  "env": {
+    "browser": true,
+    "mocha": true
+  },
+  "extends": [
+    "react-app"
+  ],
+  "rules": {
+    "no-trailing-spaces": [
+      "error",
+      {
+        "skipBlankLines": true
+      }
+    ],
+    "comma-dangle": ["error", "only-multiline"],
+    "no-return-assign": 0,
+    "eol-last": 0,
+    "semi": [
+      2,
+      "always"
+    ],
+    "camelcase": 0,
+    "object-curly-spacing": 0,
+    "quotes": [
+      2,
+      "single",
+      "avoid-escape"
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 0
+      }
+    ],
+    "object-property-newline": [
+      "error",
+      {
+        "allowMultiplePropertiesPerLine": false,
+        "allowAllPropertiesOnSameLine": true
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "16.13.1",
+      "flowVersion": "0.86"
+    },
+    "propWrapperFunctions": [
+      "forbidExtraProps"
+    ]
+  }
+}
