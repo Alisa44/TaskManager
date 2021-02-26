@@ -2,6 +2,7 @@ import React, {useMemo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Form, Input, Button} from 'antd';
 import {createNewTask, editCurrentTask} from '../../store/actions';
+import {textStatuses} from '../../constants/text';
 import styles from '../../commonStyles/form.module.scss';
 
 const TaskForm = ({handleCancel}) => {
@@ -13,7 +14,10 @@ const TaskForm = ({handleCancel}) => {
     const getNewStatus = (textWasEdited) => {
         const {status: currentStatus} = currentTask;
         let newStatus = currentStatus;
-        if (textWasEdited) newStatus = currentStatus === 0 ? 1 : currentStatus === 10 ? 11 : currentStatus;
+        if (textWasEdited) newStatus = currentStatus === textStatuses.NOT_DONE
+            ? textStatuses.NOTE_DONE_EDITED
+            : currentStatus === textStatuses.DONE
+                ? textStatuses.DONE_EDITED : currentStatus;
         return newStatus;
     };
 
