@@ -1,11 +1,13 @@
 import axios from 'axios';
 import {BASE_URL} from '../constants/api';
 
-export const getTasks = () => {
+export const getTasks = (sortField, sortDirection, page) => {
+    const params = {developer: 'Larysa', sort_field: sortField, sort_direction: sortDirection, page};
     return axios({
-        url: `${BASE_URL}/?developer=Larysa`,
+        url: `${BASE_URL}/`,
         method: 'get',
         headers: {'content-type': 'application/json'},
+        params,
     });
 };
 
@@ -28,7 +30,7 @@ export const editTask = (data, token) => {
     });
 };
 
-export const login = (data) => {
+export const loginAdmin = (data) => {
     return axios({
         url: `${BASE_URL}/login?developer=Larysa`,
         method: 'POST',

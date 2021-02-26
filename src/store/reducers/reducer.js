@@ -4,6 +4,12 @@ const initialState = {
     tasks: [],
     isTaskFormOpen: false,
     isLogInFormOpen: false,
+    isAdmin: false,
+    total: 0,
+    currentPage: 1,
+    sortDirection: null,
+    sortField: null,
+    userMessage: null,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -18,6 +24,24 @@ export const reducer = (state = initialState, action) => {
 
         case ACTIONS.SET_TASK_FORM_OPEN:
             return {...state, isTaskFormOpen: payload};
+
+        case ACTIONS.SET_IS_ADMIN:
+            return {...state, isAdmin: payload};
+            
+        case ACTIONS.SET_TOTAL:
+            return {...state, total: payload};
+
+        case ACTIONS.SET_CURRENT_PAGE:
+            return {...state, currentPage: payload};
+
+        case ACTIONS.SET_SORT_DIRECTION:
+            return {...state, sortDirection: payload};
+
+        case ACTIONS.SET_SORT_FIELD:
+            return {...state, sortField: payload};
+            
+        case ACTIONS.SET_USER_MESSAGE:
+            return {...state, userMessage: payload};
 
         default:
             return state;
