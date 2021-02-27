@@ -2,7 +2,7 @@ import React  from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { Form, Input, Button } from 'antd';
 import {login, setLoginFormOpen, setUserMessage} from '../../store/actions';
-import styles from './LoginForm.module.scss';
+import styles from '../../commonStyles/form.module.scss';
 
 const LoginForm = () => {
     const {userMessage} = useSelector(state => state.state);
